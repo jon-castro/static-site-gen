@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -24,3 +24,15 @@ class TestHTMLNode(unittest.TestCase):
         assert node.value is None
         assert node.children is None
         assert node.props is None
+        
+    def test_leaf_to_html(self):
+        node = LeafNode("p", "Hello, world!")
+        self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
+        
+    def test_leaf_no_tag(self):
+        node = LeafNode(None, "Hello, world!")
+        self.assertEqual(node.to_html(), "Hello, world!")
+        
+    def test_leaf_image_tag(self):
+        node = LeafNode("a", "Hello, world!", {"target": "https://www.google.com"})
+        self.assertEqual(node.to_html(), '<a target="https://www.google.com">Hello, world!</a>')
