@@ -5,9 +5,9 @@ from src.htmlnode import LeafNode
 
 class TextType(Enum):
     TEXT = "normal"
-    BOLD_TEXT = "bold"
-    ITALIC_TEXT = "italic"
-    CODE_TEXT = "code"
+    BOLD = "bold"
+    ITALIC = "italic"
+    CODE = "code"
     LINK = "link"
     IMAGE = "image"
     
@@ -28,11 +28,11 @@ class TextNode:
         match text_node.text_type:
             case TextType.TEXT:
                 return LeafNode(None, text_node.text)
-            case TextType.BOLD_TEXT:
+            case TextType.BOLD:
                 return LeafNode("b", text_node.text)
-            case TextType.ITALIC_TEXT:
+            case TextType.ITALIC:
                 return LeafNode("i", text_node.text)
-            case TextType.CODE_TEXT:
+            case TextType.CODE:
                 return LeafNode("code", text_node.text)
             case TextType.LINK:
                 if not text_node.url:
